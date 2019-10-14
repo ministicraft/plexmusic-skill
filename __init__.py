@@ -282,6 +282,7 @@ class PlexMusicSkill(CommonPlaySkill):
         time.sleep(0.5)
         artist, album, title, link, key = self.get_music_info()
         # self.gui["audioSource"] = link
+        self.gui.clear()
         self.gui["audioThumb"] = self.get_thumbnail(key)
         self.gui["audioTitle"] = "{}\n{}".format(artist,title)
         self.gui.show_page("audioPlayerExample.qml", override_idle=True)
@@ -361,10 +362,6 @@ Album: {}
             except FileNotFoundError:
                 pass
             self.load_data()
-
-    @resting_screen_handler('PlexIdle')
-    def handle_idle(self, message):
-        self.refresh_gui()
 
     def converse(self, utterances, lang="en-us"):
         return False
